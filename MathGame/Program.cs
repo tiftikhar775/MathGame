@@ -6,11 +6,15 @@
         {
             DisplayMenu();
         }
-
+    
         static void DisplayMenu()
         {
-            int difficulty = DifficultySelect();
-            // menu loop
+            int mode;
+            //int difficulty = DifficultySelect();
+
+            // set default difficulty
+            int difficulty = 1;
+
             while (true)
             {
                 //Console.WriteLine(difficulty);
@@ -22,8 +26,21 @@
                 Console.WriteLine("5. Change Difficulty");
                 Console.WriteLine("6. Quit\n");
 
+                string userInputString;
                 Console.Write("Select Mode: ");
-                int mode = Convert.ToInt32(Console.ReadLine());
+                userInputString = Console.ReadLine();
+
+                // input validation 
+                if (!int.TryParse(userInputString, out mode)) {
+                    Console.WriteLine("Invalid Input, Enter a number\n");
+                    continue;
+                }
+
+                if (mode < 1 || mode > 6)
+                {
+                    Console.WriteLine("Enter a valid option from the list\n");
+                    continue;
+                }
 
                 if (mode == 5)
                 {
@@ -34,6 +51,7 @@
                 // quit game
                 if (mode == 6)
                 {
+                    Console.WriteLine("Goodbye...");
                     break;
                 }
 
@@ -51,8 +69,15 @@
             int difficulty;
             do
             {
+                string userInput;
                 Console.Write("Enter here: ");
-                difficulty = Convert.ToInt32(Console.ReadLine());
+                userInput = Console.ReadLine();
+
+                // input validation
+                if (!int.TryParse(userInput, out difficulty)) {
+                    Console.WriteLine("Invalid input, enter a number");
+                }
+
             } while (difficulty < 1 || difficulty > 3);
 
             return difficulty;
